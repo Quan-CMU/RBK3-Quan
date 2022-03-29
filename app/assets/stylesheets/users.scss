@@ -1,84 +1,94 @@
 aside {
-  section.user_info {
-    margin-top: 20px;
-  }
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
+    section.user_info {
+        margin-top: 20px;
     }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
+    section {
+        padding: 10px 0;
+        margin-top: 20px;
+        &:first-child {
+            border: 0;
+            padding-top: 0;
+        }
+        span {
+            display: block;
+            margin-bottom: 3px;
+            line-height: 1;
+        }
+        h1 {
+            font-size: 1.4em;
+            text-align: left;
+            letter-spacing: -1px;
+            margin-bottom: 3px;
+            margin-top: 0px;
+        }
     }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-.gravatar {
-float: left;
-margin-right: 10px;
-}
-.gravatar_edit {
-margin-top: 15px;
 }
 
- 
+.gravatar {
+    float: left;
+    margin-right: 10px;
+}
+
+.gravatar_edit {
+    margin-top: 15px;
+}
+
+
 /* forms */
+
+
 /* forms */
+
 .text-center {
-  text-align: center;
- }
- input,
- textarea,
- select,
- .uneditable-input {
-   border: 1px solid #bbb;
-   width: 100%;
-   margin-bottom: 15px;
- }
- input {
-   height: auto !important;
- }
- 
- #error_explanation {
-  color: red;
-  ul {
+    text-align: center;
+}
+
+input,
+textarea,
+select,
+.uneditable-input {
+    border: 1px solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input {
+    height: auto !important;
+}
+
+#error_explanation {
     color: red;
-    margin: 0 0 30px;
-  }
+    ul {
+        color: red;
+        margin: 0 0 30px;
+    }
 }
+
 .field_with_errors {
-  // @extend .has-error;
-  .form-control {
-    Color: red;
-  }
+    // @extend .has-error;
+    .form-control {
+        Color: red;
+    }
 }
-#genderList{
-  display: flex;
-  .genderItem{
+
+#genderList {
     display: flex;
-    align-items: baseline;
-    margin-right: 65px;
-  }
-  .genderItem > label{
-    margin-right: 15px;
-    padding: 8px;
-  }
-  .genderItem > input{
-    transform: translateY(2px);
-  }
+    .genderItem {
+        display: flex;
+        align-items: baseline;
+        margin-right: 65px;
+    }
+    .genderItem>label {
+        margin-right: 15px;
+        padding: 8px;
+    }
+    .genderItem>input {
+        transform: translateY(2px);
+    }
 }
-.field{
-  .date{
-    display: flex;
-  }
+
+.field {
+    .date {
+        display: flex;
+    }
 }
