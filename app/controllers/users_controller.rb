@@ -20,8 +20,26 @@ class UsersController < ApplicationController
       flash.now[:success] = "Sign Up Success!"
       redirect_to @user
     else
-      render :new
+      render 'new'
     end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash.now[:success] = 'Update success!!'
+      redirect_to @users
+    else
+      render 'edit'
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def delete
+    
   end
 
   private

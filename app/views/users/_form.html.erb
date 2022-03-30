@@ -1,37 +1,40 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.number_field :phone %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<%= form_for @user, url: @user do |f| %>
+  <%= render 'shared/errors_messages' %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+      <div id="radio">
+        <%= f.label :gender %>
+        <div id = "genderList">
+          <div class = "genderItem">
+            <%= f.label :gender, 'Male', :value => 'Male' %>
+            <%= f.radio_button :gender, 'Male' %> 
+          </div>
+         <div class = "genderItem">
+          <%= f.label :gender, 'Female', :value => 'Female' %>
+          <%= f.radio_button :gender, 'Female' %>
+          </div>
+         <div class = "genderItem">
+            <%= f.label :gender, 'Other', :value => 'Other' %>
+            <%= f.radio_button :gender, 'Other' %>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :birthday, "Your Date of Birth" %><br />
+       <div class = "date">
+        <%= f.date_select :birthday, order: [:month, :day, :year], 
+                                     prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, 
+                                     start_year: Date.today.year - 18, end_year: Date.today.year - 100
+        %>
+       </div> 
+      </div>
+      <%= f.label :phone %>
+      <%= f.telephone_field :phone %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
 <% end %>

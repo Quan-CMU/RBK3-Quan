@@ -1,46 +1,9 @@
 <% provide :title, 'Sign up' %>
+<% provide(:button_text, 'Create my account') %>
+
 <h1 class="text-center">Sign up</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for @user, url: @user do |f| %>
-    <%= render 'shared/errors_messages' %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-      <div id="radio">
-        <%= f.label :gender %>
-        <div id = "genderList">
-          <div class = "genderItem">
-            <%= f.label :gender, 'Male', :value => 'Male' %>
-            <%= f.radio_button :gender, 'Male' %> 
-          </div>
-         <div class = "genderItem">
-          <%= f.label :gender, 'Female', :value => 'Female' %>
-          <%= f.radio_button :gender, 'Female' %>
-          </div>
-         <div class = "genderItem">
-            <%= f.label :gender, 'Other', :value => 'Other' %>
-            <%= f.radio_button :gender, 'Other' %>
-          </div>
-        </div>
-      </div>
-      <div class="field">
-        <%= f.label :birthday, "Your Date of Birth" %><br />
-       <div class = "date">
-        <%= f.date_select :birthday, order: [:month, :day, :year], 
-                                     prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, 
-                                     start_year: Date.today.year - 18, end_year: Date.today.year - 100
-        %>
-       </div> 
-      </div>
-      <%= f.label :phone %>
-      <%= f.telephone_field :phone %>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-      <%= f.submit 'Create my account', class: 'btn btn-primary' %>
-    <% end %>
+    <%= render 'form' %>
   </div>
 </div>
