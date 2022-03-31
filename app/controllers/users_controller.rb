@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: %i[edit update index]
+  before_action :correct_user, only: %i[edit update]
 
   def index
-    @user = User.new
+    @user = User.all
   end
   
   def show
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
       flash.now[:success] = "Sign Up Success!"
       redirect_to @user
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
       flash.now[:success] = 'Update success!!'
       redirect_to @users
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -47,4 +49,22 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :birthday, :gender, :phone, :password, :password_confirmation)
     end
+  
+  private
+    
+    def logged_in_user
+      return if logged_in?
+
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+
+  private
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
 end
