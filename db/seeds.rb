@@ -7,11 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # tao 20 user
-20.times do |i|
+100.times do |i|
   User.create(
-    name: "User ##{i}",
-    email: "thaiquan#{i}@gmail.com",
-    age: i,
-    phone: "01243565#{i}"
+    name: Faker::FunnyName.name, 
+    email: Faker::Internet.email,
+    password: 'All@123456',
+    birthday: "2000-#{rand(1..12)}-#{rand(1..25)}",
+    gender: Faker::Gender.binary_type
   )
-end 
+end

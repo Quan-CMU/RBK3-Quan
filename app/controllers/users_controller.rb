@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[edit update index]
   before_action :correct_user, only: %i[edit update]
+  USER_PER_PAGE = 10
 
   def index
-    @user = User.all
+    # @users = User.page(params[:page])
+    @page = params.fetch(:page, 1).to_i
+    @users = User.offset(@page*USER_PER_PAGE).limit(USER_PER_PAGE)
   end
   
   def show
@@ -27,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
     if @user.update(user_params)
       flash.now[:success] = 'Update success!!'
       redirect_to @user
