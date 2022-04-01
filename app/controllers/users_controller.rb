@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash.now[:success] = 'Update success!!'
-      redirect_to @users
+      redirect_to @user
     else
       render :edit
     end

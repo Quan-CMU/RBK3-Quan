@@ -116,3 +116,14 @@ input {
         border-bottom: 1px solid #ebebeb;
     }
 }
+
+.pagination {
+    span {
+        padding: 10px;
+        border: solid 0.5px #f5f5f5;
+    }
+    .current {
+        background-color: #0a77b2;
+        color: #fff;
+    }
+}

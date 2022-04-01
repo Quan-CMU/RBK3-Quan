@@ -16,6 +16,10 @@ class User < ApplicationRecord
                      maximum:50
                    }
 
+  PASSWORD_MIN_LENGTH = 6
+  validates :password, presence: true,
+                       length: {minimum: PASSWORD_MIN_LENGTH},
+                       allow_nil: true
   # VALID_PHONE_REGEX = /\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}/
   # validates :phone, presence: true,
   #                   format: { 
