@@ -1,21 +1,8 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
-
-<ul class="users">
-  <%= render @users %>
-</ul>
-<div class = page>
-
-  <% if @page >= 0 %>
-  <%= link_to "Last Page", users_path(page: @page-1) %>
-  <%else%>
-  <%= link_to "Last Page", users_path(page: @page) %>
-  <% end%>
-  |
-  <% if @page >=  @page - 1 %>
-  <%= link_to "Next Page", users_path(page: @page+1) %>
-  <%else%>
-  <%= link_to "Next Page", users_path(page: @page) %>
-  <% end %>
-</div>
+<%= paginate(@users) %>
+  <ul class="users">
+    <%= render @users %>
+  </ul>
+<%= paginate(@users) %>

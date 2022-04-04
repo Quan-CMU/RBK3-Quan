@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[edit update index]
   before_action :correct_user, only: %i[edit update]
-  USER_PER_PAGE = 10
+  # USER_PER_PAGE = 10
 
   def index
-    # @users = User.page(params[:page])
-    @page = params.fetch(:page, 1).to_i
-    @users = User.offset(@page*USER_PER_PAGE).limit(USER_PER_PAGE)
+    @users = User.page(params[:page])
+    # @page = params.fetch(:page, 1).to_i
+    # @users = User.offset(@page*USER_PER_PAGE).limit(USER_PER_PAGE)
   end
   
   def show
