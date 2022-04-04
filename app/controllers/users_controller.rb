@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[edit update index]
-  before_action :correct_user, only: %i[edit update]
+  before_action :logged_in_user, only: %i[edit update index destroy]
+  before_action :correct_user,   only: %i[edit update]
+  before_action :admin_user,     only: %i[destroy]
   # USER_PER_PAGE = 10
 
   def index
@@ -43,8 +44,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def delete
-    
+  def destroy
+    @user = User.find_by(id: params[:id])
+    if @user.destroy
+      flash[:success] = "Deleted!!!"
+    else
+      flash[:danger] = "Delete fail!!" 
+    end
+    redirect_to users_path
+  end
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 
   private
