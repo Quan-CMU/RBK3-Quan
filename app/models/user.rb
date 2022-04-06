@@ -10,12 +10,12 @@ class User < ApplicationRecord
                    length:{
                      maximum:5
                    }
-  # VALID_PHONE_REGEX = /\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}/
-  # validates :phone, presence: true,
-  #                   format: { 
-  #                     with: VALID_PHONE_REGEX,
-  #                     message: "- Phone numbers must be in xxx-xxx-xxxx format."  
-  #                   }
+  VALID_PHONE_REGEX = /\(?[0-9]{3}\)?-[0-9]{3}-[0-9]{4}/
+  validates :phone, presence: true,
+                    format: { 
+                      with: VALID_PHONE_REGEX,
+                      message: "- Phone numbers must be in xxx-xxx-xxxx format."  
+                    }
 
   def downcase_email
     self.email.downcase!
