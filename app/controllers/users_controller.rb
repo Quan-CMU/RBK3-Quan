@@ -5,13 +5,18 @@ class UsersController < ApplicationController
   # USER_PER_PAGE = 10
 
   def index
+    # @users = User.all
+    # panigration with gem
     @users = User.page(params[:page])
+    # panigration without gem
     # @page = params.fetch(:page, 1).to_i
     # @users = User.offset(@page*USER_PER_PAGE).limit(USER_PER_PAGE)
+    # @users = User.where(activated: FILL_IN).paginate(page: params[:page])
   end
   
   def show
     @user = User.find_by(id: params[:id])
+    # redirect_to root_url and return unless FILL_IN
   end
 
   # GET /users/new
@@ -22,9 +27,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new (user_params)
     if @user.save
-      log_in(@user)
-      flash.now[:success] = "Sign Up Success!"
-      redirect_to @user
+      # log_in(@user)
+      # flash.now[:success] = "Sign Up Success!"
+      # redirect_to @user
+      @user.send_activation_email
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render :new
     end
@@ -58,6 +67,7 @@ class UsersController < ApplicationController
     redirect_to(root_url) unless current_user.admin?
   end
 
+
   private
 
     def user_params
@@ -66,19 +76,19 @@ class UsersController < ApplicationController
   
   private
     
-    def logged_in_user
-      return if logged_in?
+  def logged_in_user
+    return if logged_in?
 
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
+    store_location
+    flash[:danger] = "Please log in."
+    redirect_to login_url
+  end
 
   private
-    
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
+  
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
 
 end
