@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: %i[edit update index]
+  before_action :correct_user, only: %i[edit update]
+  # USER_PER_PAGE = 10
 
   def index
-    @user = User.new
+    @users = User.page(params[:page])
+    # @page = params.fetch(:page, 1).to_i
+    # @users = User.offset(@page*USER_PER_PAGE).limit(USER_PER_PAGE)
   end
   
   def show
@@ -24,9 +29,45 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find_by(id: params[:id])
+    if @user.update(user_params)
+      flash.now[:success] = 'Update success!!'
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def delete
+    
+  end
+
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :birthday, :gender, :phone, :password, :password_confirmation)
     end
+  
+  private
+    
+    def logged_in_user
+      return if logged_in?
+
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+
+  private
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
 end

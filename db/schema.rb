@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_014251) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "birthday"
-    t.decimal "gender"
+    t.integer "gender"
     t.string "password_digest"
     t.string "remember_digest"
   end
