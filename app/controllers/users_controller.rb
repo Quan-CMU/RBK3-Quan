@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by!(id: params[:id])
+    @microposts = @user.microposts.page(params[:id]).per(10)
   end
 
   # GET /users/new
@@ -61,21 +62,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :birthday, :gender, :phone, :password, :password_confirmation)
     end
   
-  private
-    
-  def logged_in_user
-    return if logged_in?
-
-    store_location
-    flash[:danger] = 'Please log in.'
-    redirect_to login_url
-  end
-
-  private
-  
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
-  end
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
 
 end

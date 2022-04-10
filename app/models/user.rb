@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token
+  has_many :microposts, dependent: :destroy
   has_secure_password
 
   before_save {
@@ -61,12 +62,6 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
-
-  # cap nhat thuoc tinh kich hoat cua nguoi dung
-  # def activate
-  #   update_attribute(:activated,true)
-  #   update_attribute(:activated_at, Time.zone.now)
-  # end
 
   # kich hoat tai khoan
   def activate

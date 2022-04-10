@@ -1,3 +1,8 @@
+.row {
+    margin-right: -15px;
+    margin-left: 150px;
+}
+
 aside {
     section.user_info {
         margin-top: 20px;
@@ -25,6 +30,7 @@ aside {
 }
 
 .gravatar {
+    width: 60px;
     float: left;
     margin-right: 10px;
 }
@@ -57,7 +63,7 @@ input {
 }
 
 #error_explanation {
-    color: red;
+    width: 100%;
     ul {
         color: red;
         margin: 0 0 30px;
@@ -65,6 +71,7 @@ input {
 }
 
 .field_with_errors {
+    width: 100%;
     // @extend .has-error;
     .form-control {
         Color: red;
