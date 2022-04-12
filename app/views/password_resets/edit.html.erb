@@ -1,0 +1,15 @@
+<%provide :title, 'Forgot password'%>
+<% provide(:button_text, 'Change password') %>
+<h1>FORGOT PASSWORD</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(url: password_resets_url, scope: :password_reset, local: true) do |f| %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
