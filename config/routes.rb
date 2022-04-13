@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get    'micropost/micropost'
+  get    '/microposts',to:'microposts#micropost'
   get    '/action',   to: 'contact#action'
   get    '/help',     to: 'static_pages#help'
   get    '/about',    to: 'static_pages#about'
@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   get    '/login',    to:'sessions#new'
   post   '/login',    to:'sessions#create'
   delete '/logout',   to: 'sessions#destroy'
-  root "static_pages#home"
-  # resources :micropost
+  root to: 'static_pages#home'
+  resources :microposts, only: %i[create destroy]
   resources :users #only: %i[show new create edit delete update index destroy]  
   resources :account_activations, only: %i[edit]
+  resources :password_resets,     only: %i[new create edit update]
 end
 

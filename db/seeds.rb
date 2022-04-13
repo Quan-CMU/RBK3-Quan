@@ -15,6 +15,13 @@ User.create!(name: 'Thai Tien Minh Quan',
              activated_at: Time.zone.now                        
 )
 
+users = User.where(activated: true).take(6)
+30.times do
+  users.each do |user|
+    user.microposts.create!(content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+  end
+end
+
 # tao 100 user
 100.times do |i|
   User.create(
