@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :microposts, dependent: :destroy
+  has_many_attached :photos
+  
   has_secure_password
 
   before_save {
@@ -86,6 +88,9 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  def feed
+    microposts
+  end
   private
 
     def create_activation_digest
