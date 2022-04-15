@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by!(id: params[:id])
-    @microposts = @user.microposts.page(params[:id]).per(10)
+    @microposts = @user.microposts.page(params[:page]).per(10)
   end
 
   # GET /users/new

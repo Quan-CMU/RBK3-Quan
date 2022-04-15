@@ -31,3 +31,4 @@
 
 en:
   hello: "Hello world"
+  file_maximum: "should be less than 5MB"
